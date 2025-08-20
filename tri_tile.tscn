@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3p7q4tswpjpa"]
+
+[ext_resource type="Script" path="res://tri_tile.gd" id="1_f84vu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jiwgw"]
+albedo_color = Color(0.29, 0.157373, 0.00579999, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_7c6fj"]
+material = SubResource("StandardMaterial3D_jiwgw")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7qyhu"]
+data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="TriTile" type="Node3D"]
+script = ExtResource("1_f84vu")
+
+[node name="TriMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, 0)
+mesh = SubResource("PrismMesh_7c6fj")
+skeleton = NodePath("../../../Ground/GroundMesh")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_7qyhu")
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
